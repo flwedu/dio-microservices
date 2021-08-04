@@ -17,5 +17,6 @@ public class Item {
 
     @Id
     private Long productId;
+
     private Integer amount;
 }
