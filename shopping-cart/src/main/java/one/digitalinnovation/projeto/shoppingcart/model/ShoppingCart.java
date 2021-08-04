@@ -1,5 +1,6 @@
 package one.digitalinnovation.projeto.shoppingcart.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -25,4 +26,11 @@ public class ShoppingCart {
 
     @ManyToMany
     private List<Item> itemList;
+
+    public List<Item> getItemList() {
+        if (itemList == null) {
+            itemList = new ArrayList<>();
+        }
+        return itemList;
+    }
 }
