@@ -1,4 +1,4 @@
-# dio-product-catalog
+# dio-microservices
 
 Um simples projeto de um sistema de catálogo de produtos utilizando uma arquitetura distribuída em microsserviços.
 Criado durante o **Santander Bootcamp | Fullstack Developer**, em parceria com a [Digital Innovation One](https://web.digitalinnovation.one/) em 2021.
