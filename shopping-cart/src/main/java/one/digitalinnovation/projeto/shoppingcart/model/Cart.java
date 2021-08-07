@@ -21,7 +21,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class ShoppingCart {
+public class Cart {
 
     @Id()
     private Long id;
