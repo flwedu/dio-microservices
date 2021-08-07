@@ -15,6 +15,22 @@ Para criação do projeto foram utilizadas várias tecnologias. Dentre elas as p
 - Banco de dados em memória H2
 - Netflix Eureka service registry
 
+## Descrição de cada aplicação
+
+O projeto é composto por vários microsserviços.
+
+- **product-catalog**: uma API REST que manipula produtos, consumindo um banco de dados Elastic Search.
+  Ouvindo por padrão em `8081`.
+- **shopping-cart**: uma API REST que manipula carrinhos de compra.
+  Ouvindo por padrão em `8082`.
+- **config-server**: aplicação que fornece as configurações para as demais APIs.
+  Ouvindo por padrão em `8888`. As configurações servidas às demais aplicações estão armazenadas no repositório [dio-microservices-configurations](https://github.com/flwedu/dio-microservices-configuration).
+- **service-discovery**: aplicação que exibe todos os que estão rodando e pertencem a um sistema. Ouvindo por padrão em `9000`.
+- **gateway**: aplicação que ouve todas as requisições para `8080`e às redireciona para a porta correspondente de acordo com a URL da requisição.
+  - Requisições para `http://localhost:8080/product/` são redirecionadas para a porta do `product-catalog` (8081).
+  - Requisições para `http://localhost:8080/cart/` são redirecionadas para a porta do `shopping-cart` (8082).
+
+
 ## Testando a aplicação
 
 ### Rodando banco de dados
@@ -31,24 +47,14 @@ Para rodar nas portas 9200 e 9300, esse é o comando:
 ```bash
 docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:7.13.4
 ```
+
 ![image](https://user-images.githubusercontent.com/55285816/128581861-14c7c0ee-c578-42c6-983f-30e7a9cfa924.png)
 
 
 A aplicação shopping-cart possui um banco de dados H2, então não é necessário iniciar o mesmo separadamente.
 
-### Rodando as aplicações principais
-
-O projeto é composto por vários microsserviços.
-
-- **product-catalog**: uma API REST que manipula produtos, consumindo um banco de dados Elastic Search.
-  Ouvindo por padrão em `8081`.
-- **shopping-cart**: uma API REST que manipula carrinhos de compra.
-  Ouvindo por padrão em `8082`.
-- **config-server**: aplicação que fornece as configurações para as demais APIs.
-  Ouvindo por padrão em `8888`.
-- **service-discovery**: aplicação que exibe todos os que estão rodando e pertencem a um sistema. Ouvindo por padrão em `9000`.
-
-Para rodar cada um dos serviços, é necessário acessar o projeto referente a cada um e utilizar o comando:
+### Rodando as aplicações
+Para rodar cada uma das aplicações, é necessário acessar o projeto referente a cada um e utilizar o comando:
 
 ```bash
 gradle bootRun
@@ -56,5 +62,6 @@ gradle bootRun
 
 ### Verificando lista de serviços em execução
 Após o boot de cada uma das aplicações, uma lista de cada um dos endpoints disponíveis pode ser exibida em `http://localhost:9000`.
+
 ![image](https://user-images.githubusercontent.com/55285816/128581758-94107360-a492-405c-8a9f-7c2be2b978b8.png)
 
