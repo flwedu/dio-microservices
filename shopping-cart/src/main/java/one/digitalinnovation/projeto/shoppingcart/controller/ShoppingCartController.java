@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import one.digitalinnovation.projeto.shoppingcart.dao.ProductDAO;
 import one.digitalinnovation.projeto.shoppingcart.model.Cart;
+import one.digitalinnovation.projeto.shoppingcart.model.Product;
 import one.digitalinnovation.projeto.shoppingcart.service.CartService;
 
 @RestController
@@ -27,7 +27,7 @@ public class ShoppingCartController {
     }
 
     @PostMapping("/{id}")
-    Cart addItem(@PathVariable Long id, @RequestBody ProductDAO product) {
+    Cart addItem(@PathVariable Long id, @RequestBody Product product) {
 
 	return cartService.addItemToCart(id, product);
     }
