@@ -17,9 +17,9 @@ ext {
 }
 
 dependencies {
-	implementation 'org.springframework.cloud:spring-cloud-config-server'
+	implementation 'org.springframework.cloud:spring-cloud-config-server:3.0.4'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator:2.5.3'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.3'
 }
 
 dependencyManagement {
