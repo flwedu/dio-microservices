@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import one.digitalinnovation.projeto.shoppingcart.model.Cart;
 import one.digitalinnovation.projeto.shoppingcart.model.Product;
 import one.digitalinnovation.projeto.shoppingcart.repository.CartRepository;
-import one.digitalinnovation.projeto.shoppingcart.repository.ProductRepository;
 import one.digitalinnovation.projeto.shoppingcart.restclient.ProductRestClient;
 
 @Service
@@ -16,9 +15,6 @@ public class CartService {
 
     @Autowired
     private CartRepository shoppingCartRepository;
-
-    @Autowired
-    private ProductRepository productRepository;
 
     private ProductRestClient productRestClient = new ProductRestClient();
 
