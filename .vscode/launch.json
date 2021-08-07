@@ -1,0 +1,49 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Launch ConfigServerApplication",
+            "request": "launch",
+            "mainClass": "one.digitalinnovation.projeto.configserver.ConfigServerApplication",
+            "projectName": "configserver"
+        },
+        {
+            "type": "java",
+            "name": "Launch GatewayApplication",
+            "request": "launch",
+            "mainClass": "one.digitalinnovation.projeto.gateway.GatewayApplication",
+            "projectName": "gateway"
+        },
+        {
+            "type": "java",
+            "name": "Launch ProductCatalogApplication",
+            "request": "launch",
+            "mainClass": "one.digitalinnovation.projeto.productcatalog.ProductCatalogApplication",
+            "projectName": "product-catalog"
+        },
+        {
+            "type": "java",
+            "name": "Launch ServiceDiscoveryApplication",
+            "request": "launch",
+            "mainClass": "one.digitalinnovation.projeto.servicediscovery.ServiceDiscoveryApplication",
+            "projectName": "service-discovery"
+        },
+        {
+            "type": "java",
+            "name": "Launch ShoppingCartApplication",
+            "request": "launch",
+            "mainClass": "one.digitalinnovation.projeto.shoppingcart.ShoppingCartApplication",
+            "projectName": "shopping-cart"
+        }
+    ]
+}
