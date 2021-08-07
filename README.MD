@@ -30,7 +30,6 @@ O projeto é composto por vários microsserviços.
   - Requisições para `http://localhost:8080/product/` são redirecionadas para a porta do `product-catalog` (8081).
   - Requisições para `http://localhost:8080/cart/` são redirecionadas para a porta do `shopping-cart` (8082).
 
-
 ## Testando a aplicação
 
 ### Rodando banco de dados
@@ -50,10 +49,10 @@ docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elas
 
 ![image](https://user-images.githubusercontent.com/55285816/128581861-14c7c0ee-c578-42c6-983f-30e7a9cfa924.png)
 
-
 A aplicação shopping-cart possui um banco de dados H2, então não é necessário iniciar o mesmo separadamente.
 
 ### Rodando as aplicações
+
 Para rodar cada uma das aplicações, é necessário acessar o projeto referente a cada um e utilizar o comando:
 
 ```bash
@@ -61,7 +60,46 @@ gradle bootRun
 ```
 
 ### Verificando lista de serviços em execução
+
 Após o boot de cada uma das aplicações, uma lista de cada um dos endpoints disponíveis pode ser exibida em `http://localhost:9000`.
 
 ![image](https://user-images.githubusercontent.com/55285816/128581758-94107360-a492-405c-8a9f-7c2be2b978b8.png)
 
+### Inserindo e consultando dados
+
+A fim de testes, primeiro é necessário inserir alguns produtos.
+Basta disparar uma requisição POST para `http://localhost:8080/product/` com um body JSON como no exemplo:
+
+```json
+{
+  "name": "TV", // Nome do produto
+  "amount": 1 // Quantidade
+}
+```
+
+Uma requisição GET pode ser realizada para `http://localhost:8080/product/` afim de se obter uma lista com todos os produtos cadastrados, ou para `http://localhost:8080/product/{id}` para consultar apenas o produto com o `{id}`informado.
+
+Depois pode se criar um novo carrinho de compras, fazendo uma requisição POST para `http://localhost:8080/cart/{id}` (será criado um carrinho com o número de Id informado em `{id}`). No body da requisição devem estar os dados do produto:
+
+```json
+{
+  "productId": 1, // Id do produto
+  "amount": 100 // quantidade a ser inserida no carrinho
+}
+```
+
+Para verificar o resultado, pode-se enviar uma requisição GET para `http://localhost:8080/cart/1`. Essa será a resposta esperada:
+
+```json
+{
+  "id": 1, // Id do carrinho
+  "itemList": [
+    // Array  com os produtos
+    {
+      "id": 1,
+      "productId": 1,
+      "amount": 100
+    }
+  ]
+}
+```
