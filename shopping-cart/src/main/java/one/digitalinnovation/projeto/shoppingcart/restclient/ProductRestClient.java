@@ -5,7 +5,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-import one.digitalinnovation.projeto.shoppingcart.dao.ProductDAO;
 import one.digitalinnovation.projeto.shoppingcart.model.Product;
 import one.digitalinnovation.projeto.shoppingcart.repository.ProductRepository;
 
@@ -29,10 +28,10 @@ public class ProductRestClient {
 	this.productRepository = productRepository;
     }
 
-    public ResponseEntity<ProductDAO> getProductDAOById(Long id) {
+    public ResponseEntity<Product> getProductById(Long id) {
 
 	return clientRest.exchange("http://localhost:8080/product/" + id.toString(), HttpMethod.GET, null,
-		ProductDAO.class);
+		Product.class);
     }
 
     public Product findAndSave(Product product) {
