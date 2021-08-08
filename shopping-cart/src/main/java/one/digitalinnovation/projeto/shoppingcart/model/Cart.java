@@ -29,7 +29,7 @@ public class Cart {
     @OneToMany
     private List<Product> productList;
 
-    public List<Product> getItemList() {
+    public List<Product> getProductList() {
 	if (productList == null) {
 	    productList = new ArrayList<>();
 	}
@@ -41,10 +41,10 @@ public class Cart {
     // Caso positivo, apenas ajusta o seu amount (quantidade).
     public void addProductToShoppingCart(Product newProduct) {
 
-	if (productList.stream().noneMatch(product -> product.getId() == newProduct.getId())) {
-	    productList.add(newProduct);
+	if (getProductList().stream().noneMatch(product -> product.getId() == newProduct.getId())) {
+	    getProductList().add(newProduct);
 	} else {
-	    productList.stream().filter(product -> product.getId() == newProduct.getId()).forEach(product -> {
+	    getProductList().stream().filter(product -> product.getId() == newProduct.getId()).forEach(product -> {
 		product.setAmount(product.getAmount() + newProduct.getAmount());
 	    });
 	}
