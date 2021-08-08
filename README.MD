@@ -83,8 +83,13 @@ Depois pode se criar um novo carrinho de compras, fazendo uma requisição POST 
 
 ```json
 {
-  "productId": 1, // Id do produto
-  "amount": 100 // quantidade a ser inserida no carrinho
+  "id": {
+    // o Id é uma PK composta
+    "productId": 1,
+    "cartId": 1 // deve ser o mesmo número de ID da URL
+  },
+  "name": "TV",
+  "amount": 5
 }
 ```
 
@@ -92,13 +97,15 @@ Para verificar o resultado, pode-se enviar uma requisição GET para `http://loc
 
 ```json
 {
-  "id": 1, // Id do carrinho
-  "itemList": [
-    // Array  com os produtos
+  "id": 1,
+  "products": [
     {
-      "id": 1,
-      "productId": 1,
-      "amount": 100
+      "id": {
+        "productId": 1,
+        "cartId": 1
+      },
+      "name": "TV",
+      "amount": 40
     }
   ]
 }
