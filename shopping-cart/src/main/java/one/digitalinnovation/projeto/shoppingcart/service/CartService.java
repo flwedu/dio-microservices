@@ -8,27 +8,28 @@ import org.springframework.stereotype.Service;
 import one.digitalinnovation.projeto.shoppingcart.model.Cart;
 import one.digitalinnovation.projeto.shoppingcart.model.Product;
 import one.digitalinnovation.projeto.shoppingcart.repository.CartRepository;
-import one.digitalinnovation.projeto.shoppingcart.restclient.ProductRestClient;
+import one.digitalinnovation.projeto.shoppingcart.repository.ProductRepository;
 
 @Service
 public class CartService {
 
     @Autowired
-    private CartRepository shoppingCartRepository;
+    private CartRepository cartRepository;
 
-    private ProductRestClient productRestClient = new ProductRestClient();
+    @Autowired
+    private ProductRepository productRepository;
 
     public Optional<Cart> findById(Long id) {
-	return shoppingCartRepository.findById(id);
+	return cartRepository.findById(id);
     }
 
     public Cart addItemToCart(Long id, Product product) {
 
 	// Recupera / persiste os dados sobre o item no request body
-	Product savedProduct = productRestClient.findAndSave(product);
+	Product savedProduct = productRepository.save(product);
 
 	// Depois verifica se já existe um carrinho com esse ID na URL.
-	Optional<Cart> optionalCart = shoppingCartRepository.findById(id);
+	Optional<Cart> optionalCart = cartRepository.findById(id);
 
 	// Se já existir um carrinho com esse ID ele será chamado
 	// Se não existir, será então criado um carrinho
@@ -41,7 +42,7 @@ public class CartService {
 
     public void deleteById(Long id) {
 
-	shoppingCartRepository.deleteById(id);
+	cartRepository.deleteById(id);
     }
 
 }
