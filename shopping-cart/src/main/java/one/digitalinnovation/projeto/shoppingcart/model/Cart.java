@@ -37,23 +37,23 @@ public class Cart {
 	return products;
     }
 
-    // Esse método primeiro verifica se o CartId bate com o ID do Carro.
-    // Depois verifica se o item com o mesmo productId já existe na lista.
-    // Caso negativo, adiciona o item a lista.
-    // Caso positivo, apenas ajusta o seu amount (quantidade).
     public void addProductToShoppingCart(Product newProduct) {
 
-	if (newProduct.getId().getCartId().equals(this.getId())) {
+	// Primeiro verifica se existem produtos com o Id(cartId e productId).
+	// Caso positivo, apenas ajusta o amount dos itens encontrados.
 
-	    if (getProducts().stream().noneMatch(product -> product.getId() == newProduct.getId())) {
+	getProducts().stream().filter(UtilFunctions.productPossuioMesmoId(newProduct)).forEach(product -> {
+	    product.setAmount(product.getAmount() + newProduct.getAmount());
+	});
+
+	// Se o produto ainda não constar no carrinho, o adiciona a lista
+	if (getProducts().stream().noneMatch(UtilFunctions.productPossuioMesmoId(newProduct))) {
+
+	    // Apenas se o cartId for o mesmo
+	    if (newProduct.getId().getCartId().equals(this.getId()))
 		getProducts().add(newProduct);
-	    } else {
-		getProducts().stream().filter(product -> product.getId() == newProduct.getId()).forEach(product -> {
-		    product.setAmount(product.getAmount() + newProduct.getAmount());
-		});
-
-	    }
 
 	}
+	;
     }
 }
