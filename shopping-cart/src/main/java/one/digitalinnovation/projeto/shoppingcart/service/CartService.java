@@ -26,7 +26,9 @@ public class CartService {
     public Cart addItemToCart(Long id, Product product) {
 
 	// Recupera / persiste os dados sobre o item no request body
-	Product savedProduct = productRepository.save(product);
+	Optional<Product> productInDB = productRepository.findById(product.getId());
+
+	Product savedProduct = productInDB.orElseGet(() -> productRepository.save(product));
 
 	// Depois verifica se já existe um carrinho com esse ID na URL.
 	Optional<Cart> optionalCart = cartRepository.findById(id);
@@ -36,7 +38,7 @@ public class CartService {
 	Cart cart = optionalCart.orElseGet(() -> Cart.builder().id(id).build());
 	cart.addProductToShoppingCart(savedProduct);
 
-	return cart;
+	return cartRepository.save(cart);
 
     }
 
