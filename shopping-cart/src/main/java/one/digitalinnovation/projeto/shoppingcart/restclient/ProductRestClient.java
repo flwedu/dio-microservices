@@ -18,11 +18,16 @@ import one.digitalinnovation.projeto.shoppingcart.repository.ProductRepository;
  */
 public class ProductRestClient {
 
-    @Autowired
+    // TODO implementar todos os métodos
     private RestTemplate clientRest;
 
-    @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    public ProductRestClient(RestTemplate clientRest, ProductRepository productRepository) {
+	this.clientRest = clientRest;
+	this.productRepository = productRepository;
+    }
 
     public ResponseEntity<ProductDAO> getProductDAOById(Long id) {
 
