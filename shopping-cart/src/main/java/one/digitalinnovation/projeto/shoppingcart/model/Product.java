@@ -37,4 +37,8 @@ public class Product {
 
     }
 
+    public void addAmount(Long amountToAdd) {
+	amount += amountToAdd;
+    }
+
 }
