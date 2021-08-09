@@ -44,34 +44,25 @@ public class Cart {
 	// Caso positivo, apenas ajusta o amount dos itens encontrados.
 
 	getProducts().stream().filter(productPossuioMesmoId(newProduct)).forEach(product -> {
-	    product.setAmount(product.getAmount() + newProduct.getAmount());
+	    product.addAmount(newProduct.getAmount());
 	});
 
 	// Se o produto ainda não constar no carrinho, o adiciona a lista
 	if (getProducts().stream().noneMatch(productPossuioMesmoId(newProduct))) {
 
 	    // Apenas se o cartId for o mesmo
-	    if (newProduct.getId().getCartId().equals(this.getId()))
+	    if (productPossuiMesmoIdDoCart(newProduct))
 		getProducts().add(newProduct);
 
 	}
 	;
     }
 
-    Predicate<Product> productPossuioMesmoProductId(Product otherProduct) {
-	return product -> product.getId().getProductId().equals(otherProduct.getId().getProductId());
-    }
-
-    Predicate<Product> productPossuiOMesmoCartId(Product otherProduct) {
-	return product -> product.getId().getCartId().equals(otherProduct.getId().getCartId());
-
-    }
-
-    Predicate<Product> productPossuioMesmoId(Product otherProduct) {
+    private Predicate<Product> productPossuioMesmoId(Product otherProduct) {
 	return product -> product.getId().equals(otherProduct.getId());
     }
 
-    Predicate<Product> productPossuiAoCart(Long id) {
-	return product -> product.getId().getCartId().equals(id);
+    private boolean productPossuiMesmoIdDoCart(Product product) {
+	return product.getId().getCartId().equals(id);
     }
 }
