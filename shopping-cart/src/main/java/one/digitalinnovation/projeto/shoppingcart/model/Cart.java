@@ -48,12 +48,11 @@ public class Cart {
 	});
 
 	// Se o produto ainda não constar no carrinho, o adiciona a lista
-	if (getProducts().stream().noneMatch(productPossuioMesmoId(newProduct))) {
+	if (getProducts().stream().noneMatch(productPossuioMesmoId(newProduct))
+		&& productPossuiMesmoIdDoCart(newProduct)) {
 
 	    // Apenas se o cartId for o mesmo
-	    if (productPossuiMesmoIdDoCart(newProduct))
-		getProducts().add(newProduct);
-
+	    getProducts().add(newProduct);
 	}
 	;
     }
