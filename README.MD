@@ -13,6 +13,7 @@ Para criação do projeto foram utilizadas várias tecnologias. Dentre elas as p
 - Docker
 - ElasticSearch
 - Banco de dados em memória H2
+- Spring Cloud
 - Netflix Eureka service registry
 
 ## Descrição de cada aplicação
