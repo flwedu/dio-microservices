@@ -27,11 +27,6 @@ public class ProductController {
 	return productService.save(product);
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    Iterable<Product> saveAll(@RequestBody Iterable<Product> productList) {
-	return productService.saveAll(productList);
-    }
-
     @GetMapping()
     ArrayList<Product> listAll() {
 	var listaProdutos = new ArrayList<Product>();
