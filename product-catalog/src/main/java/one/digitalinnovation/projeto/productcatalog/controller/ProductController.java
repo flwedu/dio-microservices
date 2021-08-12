@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,20 +24,28 @@ public class ProductController {
     private ProductService productService;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    Product save(@RequestBody Product product) {
-	return productService.save(product);
+    ResponseEntity<Product> save(@RequestBody Product product) {
+
+	return ResponseEntity.ok(productService.save(product));
     }
 
     @GetMapping()
-    ArrayList<Product> listAll() {
+    ResponseEntity<ArrayList<Product>> listAll() {
+
 	var listaProdutos = new ArrayList<Product>();
 	productService.findAll().forEach(listaProdutos::add);
 
-	return listaProdutos;
+	return ResponseEntity.ok(listaProdutos);
     }
 
     @GetMapping("/{id}")
-    Optional<Product> findById(@PathVariable Long id) {
-	return productService.findById(id);
+    ResponseEntity<Product> findById(@PathVariable Long id) {
+
+	Optional<Product> optionalProduct = productService.findById(id);
+
+	if (optionalProduct.isEmpty()) {
+	    return ResponseEntity.notFound().build();
+	}
+	return ResponseEntity.ok(optionalProduct.get());
     }
 }
