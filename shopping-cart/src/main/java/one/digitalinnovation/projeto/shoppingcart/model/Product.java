@@ -2,6 +2,7 @@ package one.digitalinnovation.projeto.shoppingcart.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
@@ -26,19 +27,20 @@ public class Product {
     private String name;
     private Long amount;
 
-    @Getter
+    @Embeddable
     @Setter
+    @Getter
     @EqualsAndHashCode
     public static class Id implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	private Long productId;
-	private Long cartId;
+        private static final long serialVersionUID = 1L;
+        private Long productId;
+        private Long cartId;
 
     }
 
     public void addAmount(Long amountToAdd) {
-	amount += amountToAdd;
+        amount += amountToAdd;
     }
 
 }
